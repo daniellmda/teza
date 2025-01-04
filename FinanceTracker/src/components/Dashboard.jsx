@@ -1,6 +1,7 @@
 import React from "react";
 import IncomeForm from "./IncomeForm";
-
+import ExpenseForm from "./ExpenseForm";
+import SummaryCard from "./SummaryCard";
 const Dashboard = () => {
   return (
     <>
@@ -15,6 +16,12 @@ const Dashboard = () => {
         </header>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <IncomeForm />
+          <ExpenseForm />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+          <SummaryCard title="Total Income" value="" />
+          <SummaryCard title="Total Expenses" value="" />
+          <SummaryCard title="Remaining Budget" value="" />
         </div>
       </div>
     </>

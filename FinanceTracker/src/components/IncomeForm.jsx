@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 const IncomeForm = () => {
   const [income, setIncome] = useState(0);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <>
-      <form className="bg-white rounded shadow-md">
+      <form className="bg-white p-4 rounded shadow-md" onSubmit={handleSubmit}>
         <label className="block font-bold mb-2">Add income:</label>
         <input
           type="number"
-          value=""
+          value={income}
           onChange={(e) => setIncome(Number(e.target.value))}
           className="w-full p-2 border rounded"
         />
