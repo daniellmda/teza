@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-const IncomeForm = () => {
+const IncomeForm = ({ onAddIncome }) => {
   const [income, setIncome] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    onAddIncome(income);
   };
   return (
     <>

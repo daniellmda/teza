@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-const ExpenseForm = () => {
+const ExpenseForm = ({ onAddExpense }) => {
   const [expense, setExpense] = useState({ category: "", amount: 0 });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    onAddExpense(expense);
   };
 
   return (
@@ -20,7 +21,9 @@ const ExpenseForm = () => {
         <input
           type="number"
           value={expense.amount}
-          onChange={(e) => setExpense({ ...expense, amount: e.target.value })}
+          onChange={(e) =>
+            setExpense({ ...expense, amount: Number(e.target.value) })
+          }
           className="w-full p-2 border rounded"
         />
         <button className="mt-4 bg-red-500 text-white py-2 px-4 rounded">

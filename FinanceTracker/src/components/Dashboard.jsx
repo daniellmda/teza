@@ -2,7 +2,27 @@ import React from "react";
 import IncomeForm from "./IncomeForm";
 import ExpenseForm from "./ExpenseForm";
 import SummaryCard from "./SummaryCard";
+import useFinancialData from "../hooks/useFinancialData";
+import Chart from "./Chart";
+
 const Dashboard = () => {
+  const {
+    income,
+    expenses,
+    totalExpenses,
+    remainingBudget,
+    addIncome,
+    addExpense,
+  } = useFinancialData();
+
+  const handleAddIncome = (income) => {
+    addIncome(Number(income));
+  };
+
+  const handleAddExpense = (newExpense) => {
+    addExpense(newExpense);
+  };
+
   return (
     <>
       <div className="dashboard p-6 bg-gradient-to-r from-blue-400 to-purple-100 min-h-screen">
@@ -15,13 +35,16 @@ const Dashboard = () => {
           </p>
         </header>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <IncomeForm />
-          <ExpenseForm />
+          <IncomeForm onAddIncome={handleAddIncome} />
+          <ExpenseForm onAddExpense={handleAddExpense} />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-          <SummaryCard title="Total Income" value="" />
-          <SummaryCard title="Total Expenses" value="" />
-          <SummaryCard title="Remaining Budget" value="" />
+          <SummaryCard title="Total Income" value={income} />
+          <SummaryCard title="Total Expenses" value={totalExpenses} />
+          <SummaryCard title="Remaining Budget" value={remainingBudget} />
+        </div>
+        <div className="mt-8">
+          <Chart data={expenses} />
         </div>
       </div>
     </>
