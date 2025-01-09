@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import IncomeForm from "./IncomeForm";
 import ExpenseForm from "./ExpenseForm";
 import SummaryCard from "./SummaryCard";
+import withLoading from "../hoc/withLoading";
 import useFinancialData from "../hooks/useFinancialData";
 import Chart from "./Chart";
 import PersonalFinanceDashboard from "../report/PersonalFinanceDashboard";
+
+const SummaryCardwithLoading = withLoading(SummaryCard);
 
 const Dashboard = () => {
   const {
@@ -16,6 +19,8 @@ const Dashboard = () => {
     addExpense,
   } = useFinancialData();
 
+  const [loading, setLoading] = useState(true);
+
   const handleAddIncome = (income) => {
     addIncome(Number(income));
   };
@@ -23,6 +28,13 @@ const Dashboard = () => {
   const handleAddExpense = (newExpense) => {
     addExpense(newExpense);
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false); // Set loading to false after 2 seconds
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
@@ -44,9 +56,21 @@ const Dashboard = () => {
           <ExpenseForm onAddExpense={handleAddExpense} />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-          <SummaryCard title="Total Income" value={income} />
-          <SummaryCard title="Total Expenses" value={totalExpenses} />
-          <SummaryCard title="Remaining Budget" value={remainingBudget} />
+          <SummaryCardwithLoading
+            title="Total Income"
+            value={income}
+            isLoading={loading}
+          />
+          <SummaryCardwithLoading
+            title="Total Expenses"
+            value={totalExpenses}
+            isLoading={loading}
+          />
+          <SummaryCardwithLoading
+            title="Remaining Budget"
+            value={remainingBudget}
+            isLoading={loading}
+          />
         </div>
         <div className="mt-8">
           <Chart data={expenses} />
