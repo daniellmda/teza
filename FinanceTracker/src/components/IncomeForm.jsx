@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 const IncomeForm = ({ onAddIncome }) => {
-  const [income, setIncome] = useState(0);
+  const [income, setIncome] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddIncome(income);
+    onAddIncome(income === "" ? 0 : Number(income));
   };
   return (
     <>
@@ -15,6 +15,7 @@ const IncomeForm = ({ onAddIncome }) => {
           value={income}
           onChange={(e) => setIncome(Number(e.target.value))}
           className="w-full p-2 border rounded"
+          placeholder="0"
         />
         <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded">
           Submit

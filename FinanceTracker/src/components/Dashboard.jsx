@@ -4,6 +4,7 @@ import ExpenseForm from "./ExpenseForm";
 import SummaryCard from "./SummaryCard";
 import useFinancialData from "../hooks/useFinancialData";
 import Chart from "./Chart";
+import PersonalFinanceDashboard from "../report/PersonalFinanceDashboard";
 
 const Dashboard = () => {
   const {
@@ -33,6 +34,10 @@ const Dashboard = () => {
           <p className="text-lg text-gray-600 mt-2">
             Track your incomes and expenses
           </p>
+          <PersonalFinanceDashboard
+            totalExpenses={totalExpenses}
+            expenses={expenses}
+          />
         </header>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <IncomeForm onAddIncome={handleAddIncome} />

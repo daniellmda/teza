@@ -9,7 +9,7 @@ const Chart = ({ data }) => {
     labels: data.map((exp) => exp.category),
     datasets: [
       {
-        data: data.map((exp) => exp.category),
+        data: data.map((exp) => exp.amount),
         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
       },
     ],

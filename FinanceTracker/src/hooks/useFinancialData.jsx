@@ -4,7 +4,10 @@ const useFinancialData = () => {
   const [income, setIncome] = useState(0);
   const [expenses, setExpenses] = useState([]);
 
-  const addIncome = useCallback((amount) => setIncome(amount), []);
+  const addIncome = useCallback(
+    (amount) => setIncome((prevIncome) => prevIncome + amount),
+    []
+  );
 
   const addExpense = useCallback((expense) => {
     console.log("addExpense function created!");
